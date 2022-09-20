@@ -1,0 +1,11 @@
+<div class="container">
+    {{#if posts.length}}
+        {{#each posts as |post|}}
+            {{> post-details}}
+        {{/each}}
+    {{/if}}    
+</div>
+
+<button class="btn btn-primary">Make New Post</button>
+
+<script src="./js/dashboard.js"></script>
