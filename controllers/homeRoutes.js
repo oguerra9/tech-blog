@@ -49,26 +49,26 @@ home.get('/post/:id', async (req, res) => {
     }
 });
 
-home.get('/comment/:id', async (req, res) => {
-    try {
-        const commentData = await Comment.findByPk(req.params.id, {
-            include: [
-                {
-                    model: User,
-                    attributes: ['name'],
-                },
-            ],
-        });
-        const comment = commentData.get({ plain: true });
+// home.get('/comment/:id', async (req, res) => {
+//     try {
+//         const commentData = await Comment.findByPk(req.params.id, {
+//             include: [
+//                 {
+//                     model: User,
+//                     attributes: ['name'],
+//                 },
+//             ],
+//         });
+//         const comment = commentData.get({ plain: true });
 
-        res.render('comment', {
-            ...comment,
-            logged_in: req.session.logged_in
-        });
-    } catch (err) {
-        res.status(500).json(err);
-    }
-});
+//         res.render('comment', {
+//             ...comment,
+//             logged_in: req.session.logged_in
+//         });
+//     } catch (err) {
+//         res.status(500).json(err);
+//     }
+// });
 
 // Use withAuth middleware to prevent access to route
 home.get('/dashboard', withAuth, async (req, res) => {
@@ -99,5 +99,41 @@ home.get('/login', (req, res) => {
 
     res.render('login');
 });
+
+home.get('/signup', (req, res) => {
+    // If the user is already logged in, redirect the request to another route
+    if (req.session.logged_in) {
+        res.redirect('/dashboard');
+        return;
+    }
+
+    res.render('signup');
+});
+
+home.get('/new-post', withAuth, (req, res) => {
+    res.render('create-post');
+});
+
+home.get('/edit-post/:id', withAuth, async (req, res) => {
+    try {
+        const postData = await Post.findByPk(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    attributes: ['name'],
+                },
+            ],
+        });
+
+        const post = postData.get({ plain: true });
+
+        res.render('edit-post', {
+            ...post,
+            logged_in: req.session.logged_in
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+})
 
 module.exports = home;

@@ -2,7 +2,16 @@
     {{> post-details}}
     <section id="post-comment-section">
         {{#each post.comments as |comment|}}
-        {{> comment-details}}
+            {{> comment-details}}
         {{/each}}
     </section>
+    {{#if logged_in}}
+        <div class="form-outline comment-form" data-id="{{id}}">
+            <textarea class="form-control" id="comment1" rows="4"></textarea>
+            <label class="form-label" for="comment">Comment</label>
+            <button type="submit" class="btn btn-primary">Post Comment</button>
+        </div>
+    {{/if}}
 </section>
+
+<script src="./public/js/post.js"></script>

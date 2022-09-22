@@ -1,11 +1,47 @@
 <div class="container">
     {{#if posts.length}}
-        {{#each posts as |post|}}
-            {{> post-details}}
-        {{/each}}
+        <div class="col post-list"></div>
+            <h3>My Posts</h3>
+            {{#each posts as |post|}}
+                {{!-- <section class="row">
+                    <a href="/post/{{id}}">
+                        <div class="card-header">{{title}}</div>
+                    </a>
+                    <a href="/edit-post/{{id}}"><button class="btn" id="edit-btn">Edit Post</button></a>
+                    <button class="btn" id="delete-post-btn" data-id="{{id}}">Delete Post</button>
+                </section> --}}
+                <div class="row mb-2">
+                    <div class="col-md-8">
+                        <h4><a href="/posts/{{post.id}}">{{post.title}}</a></h4>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-sm btn-danger" id="edit-btn" data-id="{{post.id}}">EDIT</button>
+                        <button class="btn btn-sm btn-danger" id="delete-btn" data-id="{{post.id}}">DELETE</button>
+                    </div>
+                </div>
+            {{/each}}
     {{/if}}    
+
+{{!-- 
+    {{#if projects.length}}
+  <div class="col-md-6 project-list">
+    <h3>Current Projects:</h3>
+
+    {{#each projects as |project|}}
+    <div class="row mb-2">
+      <div class="col-md-8">
+        <h4><a href="/project/{{project.id}}">{{project.name}}</a></h4>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-sm btn-danger" data-id="{{project.id}}">DELETE</button>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}} --}}
+
 </div>
 
-<button class="btn btn-primary">Make New Post</button>
+<a href="/new-post"><button class="btn btn-primary">Make New Post</button></a>
 
 <script src="./js/dashboard.js"></script>

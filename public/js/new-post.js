@@ -1,10 +1,13 @@
 const newFormHandler = async (event) => {
+    console.log('newFormHandler method called /public/js/dashboard.js:2');
     event.preventDefault();
 
     const title = document.querySelector('#post-title').value.trim();
     const contents = document.querySelector('#post-contents').value.trim();
 
     if (title && contents) {
+        console.log('title: ' + title);
+        console.log('contents: ' + contents);
         const response = await fetch(`api/posts`, {
             method: 'POST',
             body: JSON.stringify({ title, contents }),
@@ -21,26 +24,6 @@ const newFormHandler = async (event) => {
     }
 };
 
-const delButtonHandler = async (event) => {
-    if (event.target.hasAttribute('data-id')) {
-        const id = event.target.getAttribute('data-id');
-
-        const response = await fetch(`/api/posts/${id}`, {
-            method: 'DELETE',
-        });
-
-        if (response.ok) {
-            document.location.replace('/dashboard');
-        } else {
-            alert('Failed to delete post');
-        }
-    }
-};
-
 document
     .querySelector('.new-post-form')
     .addEventListener('submit', newFormHandler);
-
-document
-    .querySelector('.post-list')
-    .addEventListener('click', delButtonHandler);

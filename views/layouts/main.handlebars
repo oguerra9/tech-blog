@@ -17,9 +17,9 @@
         <a href="/dashboard">Dashboard</a>
         <!-- Conditionally render login or logout links -->
         {{#if logged_in}}
-        <a href="/login">login</a>
+        <a href="/logout" id="logout">logout</a>
         {{else}}
-        <a href="/logout">logout</a>
+        <a href="/login">login</a>
         {{/if}}
       </nav>
       <h1>The Tech Blog</h1>
