@@ -2,13 +2,13 @@ const newFormHandler = async (event) => {
     console.log('newFormHandler method called /public/js/dashboard.js:2');
     event.preventDefault();
 
-    const title = document.querySelector('#post-title').value.trim();
-    const contents = document.querySelector('#post-contents').value.trim();
+    const title = document.querySelector('#blogpost-title').value.trim();
+    const contents = document.querySelector('#blogpost-contents').value.trim();
 
     if (title && contents) {
         console.log('title: ' + title);
         console.log('contents: ' + contents);
-        const response = await fetch(`api/posts`, {
+        const response = await fetch(`api/blogposts`, {
             method: 'POST',
             body: JSON.stringify({ title, contents }),
             headers: {
@@ -25,5 +25,5 @@ const newFormHandler = async (event) => {
 };
 
 document
-    .querySelector('.new-post-form')
+    .querySelector('.new-blogpost-form')
     .addEventListener('submit', newFormHandler);

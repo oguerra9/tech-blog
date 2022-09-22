@@ -1,11 +1,11 @@
 const home = require('express').Router();
-const { Post, User } = require('../models');
+const { Blogpost, User } = require('../models');
 const withAuth = require('../utils/auth');
 
 home.get('/', async (req, res) => {
     try {
         // Get all posts and JOIN with user data
-        const postData = await Post.findAll({
+        const blogpostData = await Blogpost.findAll({
             include: [
                 {
                     model: User,
@@ -15,11 +15,11 @@ home.get('/', async (req, res) => {
         });
 
         // Serialize data so the template can read it
-        const posts = postData.map((post) => post.get({ plain: true }));
+        const blogposts = blogpostData.map((blogpost) => blogpost.get({ plain: true }));
 
         // Pass serialized data and session flag into template
         res.render('homepage', {
-            posts,
+            blogposts,
             logged_in: req.session.logged_in
         });
     } catch (err) {
@@ -27,9 +27,9 @@ home.get('/', async (req, res) => {
     }
 });
 
-home.get('/post/:id', async (req, res) => {
+home.get('/blogpost/:id', async (req, res) => {
     try {
-        const postData = await Post.findByPk(req.params.id, {
+        const blogpostData = await Blogpost.findByPk(req.params.id, {
             include: [
                 {
                     model: User,
@@ -38,10 +38,10 @@ home.get('/post/:id', async (req, res) => {
             ],
         });
 
-        const post = postData.get({ plain: true });
+        const blogpost = blogpostData.get({ plain: true });
 
-        res.render('post', {
-            ...post,
+        res.render('blogpost', {
+            ...blogpost,
             logged_in: req.session.logged_in
         });
     } catch (err) {
@@ -76,7 +76,7 @@ home.get('/dashboard', withAuth, async (req, res) => {
         // Find the logged in user based on the session ID
         const userData = await User.findByPk(req.session.user_id, {
             attributes: { exclude: ['password'] },
-            include: [{ model: Post }],
+            include: [{ model: Blogpost }],
         });
 
         const user = userData.get({ plain: true });
@@ -110,13 +110,13 @@ home.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-home.get('/new-post', withAuth, (req, res) => {
-    res.render('create-post');
+home.get('/new-blogpost', withAuth, (req, res) => {
+    res.render('create-blogpost');
 });
 
-home.get('/edit-post/:id', withAuth, async (req, res) => {
+home.get('/edit-blogpost/:id', withAuth, async (req, res) => {
     try {
-        const postData = await Post.findByPk(req.params.id, {
+        const blogpostData = await Blogpost.findByPk(req.params.id, {
             include: [
                 {
                     model: User,
@@ -125,10 +125,10 @@ home.get('/edit-post/:id', withAuth, async (req, res) => {
             ],
         });
 
-        const post = postData.get({ plain: true });
+        const blogpost = blogpostData.get({ plain: true });
 
-        res.render('edit-post', {
-            ...post,
+        res.render('blogpost', {
+            ...blogpost,
             logged_in: req.session.logged_in
         });
     } catch (err) {

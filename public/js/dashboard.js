@@ -8,7 +8,7 @@ deleteBtnEl.addEventListener('click', async function (event) {
       const id = event.target.getAttribute('data-id');
       console.log('id: ' + id);
   
-      const response = await fetch(`/api/posts/${id}`, {
+      const response = await fetch(`/api/blogpost/${id}`, {
         method: 'DELETE',
       });
       console.log('Deleted');
@@ -23,4 +23,4 @@ deleteBtnEl.addEventListener('click', async function (event) {
 });
 
 
-editBtnEl.addEventListener('click')
+//editBtnEl.addEventListener('click')

@@ -1,7 +1,7 @@
 <section class="container">
-    {{> post-details}}
-    <section id="post-comment-section">
-        {{#each post.comments as |comment|}}
+    {{> blogpost-details}}
+    <section id="blogpost-comment-section">
+        {{#each blogpost.comments as |comment|}}
             {{> comment-details}}
         {{/each}}
     </section>
@@ -14,4 +14,4 @@
     {{/if}}
 </section>
 
-<script src="./public/js/post.js"></script>
+<script src="./js/blogpost-view.js"></script>

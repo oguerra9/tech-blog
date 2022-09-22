@@ -1,22 +1,22 @@
 <div class="container">
-    {{#if posts.length}}
-        <div class="col post-list"></div>
+    {{#if blogposts.length}}
+        <div class="col blogpost-list"></div>
             <h3>My Posts</h3>
-            {{#each posts as |post|}}
+            {{#each blogposts as |blogpost|}}
                 {{!-- <section class="row">
-                    <a href="/post/{{id}}">
+                    <a href="/blogpost/{{id}}">
                         <div class="card-header">{{title}}</div>
                     </a>
-                    <a href="/edit-post/{{id}}"><button class="btn" id="edit-btn">Edit Post</button></a>
-                    <button class="btn" id="delete-post-btn" data-id="{{id}}">Delete Post</button>
+                    <a href="/edit-blogpost/{{id}}"><button class="btn" id="edit-btn">Edit Post</button></a>
+                    <button class="btn" id="delete-blogpost-btn" data-id="{{id}}">Delete Post</button>
                 </section> --}}
                 <div class="row mb-2">
                     <div class="col-md-8">
-                        <h4><a href="/posts/{{post.id}}">{{post.title}}</a></h4>
+                        <h4><a href="/blogposts/{{blogpost.id}}">{{blogpost.title}}</a></h4>
                     </div>
                     <div class="col-md-4">
-                        <button class="btn btn-sm btn-danger" id="edit-btn" data-id="{{post.id}}">EDIT</button>
-                        <button class="btn btn-sm btn-danger" id="delete-btn" data-id="{{post.id}}">DELETE</button>
+                        <button class="btn btn-sm btn-danger" id="edit-btn" data-id="{{blogpost.id}}">EDIT</button>
+                        <button class="btn btn-sm btn-danger" id="delete-btn" data-id="{{blogpost.id}}">DELETE</button>
                     </div>
                 </div>
             {{/each}}
@@ -42,6 +42,6 @@
 
 </div>
 
-<a href="/new-post"><button class="btn btn-primary">Make New Post</button></a>
+<a href="/new-blogpost"><button class="btn btn-primary">Make New Post</button></a>
 
 <script src="./js/dashboard.js"></script>
