@@ -31,19 +31,26 @@ home.get('/blogpost/:id', async (req, res) => {
     try {
         const blogpostData = await Blogpost.findByPk(req.params.id, {
             include: [
+                { 
+                    model: User, 
+                    through: Comment,
+                    as: 'comments'
+                },
                 {
                     model: User,
                     attributes: ['name'],
-                },
+                }, 
             ],
         });
+        console.log('blogpostdata = ' + JSON.stringify(blogpostData));
 
         const blogpost = blogpostData.get({ plain: true });
+        console.log('blogpostdata = ' + JSON.stringify(blogpostData));
 
-        res.render('blogpost', {
-            ...blogpost,
-            logged_in: req.session.logged_in
-        });
+        // res.render('blogpost', {
+        //     ...blogpost,
+        //     logged_in: req.session.logged_in
+        // });
     } catch (err) {
         res.status(500).json(err);
     }
@@ -116,18 +123,11 @@ home.get('/new-blogpost', withAuth, (req, res) => {
 
 home.get('/edit-blogpost/:id', withAuth, async (req, res) => {
     try {
-        const blogpostData = await Blogpost.findByPk(req.params.id, {
-            include: [
-                {
-                    model: User,
-                    attributes: ['name'],
-                },
-            ],
-        });
+        const blogpostData = await Blogpost.findByPk(req.params.id);
 
         const blogpost = blogpostData.get({ plain: true });
 
-        res.render('blogpost', {
+        res.render('edit-blogpost', {
             ...blogpost,
             logged_in: req.session.logged_in
         });

@@ -11,17 +11,24 @@ Blogpost.belongsTo(User, {
     foreignKey: 'user_id'
 });
 
-Blogpost.hasMany(Comment, {
-    foreignKey: 'blogpost_id',
-    onDelete: 'CASCADE'
+User.belongsToMany(Blogpost, {
+    through: {
+        model: Comment,
+    },
+    as: 'comments'
 });
 
-Comment.belongsTo(Blogpost, {
-    foreignKey: 'blogpost_id'
-});
+// Comment.belongsTo(Blogpost, {
+//     foreignKey: 'blogpost_id'
+// });
 
-Comment.hasOne(User, {
-    foreignKey: 'user_id'
-});
+// Blogpost.hasMany(Comment, {
+//     foreignKey: 'blogpost_id',
+//     onDelete: 'CASCADE'
+// });
+
+// Comment.hasOne(User, {
+//     foreignKey: 'user_id'
+// });
 
 module.exports = { User, Blogpost, Comment };

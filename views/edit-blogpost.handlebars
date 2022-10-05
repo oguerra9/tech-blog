@@ -1,4 +1,4 @@
-<form class="form new-project-form">
+<form class="form edit-blogpost-form">
     <div class="form-group">
         <label for="blogpost-title">Post Title:</label>
         <textarea class="form-textarea" id="blogpost-title" name="blogpost-title">{{title}}</textarea>
@@ -8,8 +8,8 @@
         <textarea class="form-input" id="blogpost-contents" name="blogpost-contents">{{contents}}</textarea>
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Update Post</button>
+        <button type="submit" class="btn btn-primary" data-id="{{id}}" id="update-btn">Update Post</button>
     </div>
 </form>
 
-<script src="./js/dashboard.js"></script>
+<script src="/js/edit-blogpost.js"></script>

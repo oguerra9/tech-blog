@@ -18,11 +18,17 @@ blogpost.post('/', withAuth, async (req, res) => {
 
 blogpost.put('/:id', withAuth, async (req, res) => {
     try {
-        const updatedBlogpost = await Blogpost.update(req.body, {
-            where: {
-                id: req.session.user_id,
+        const updatedBlogpost = await Blogpost.update(
+            {
+                 title: req.body.title,
+                 contents: req.body.contents,
             },
-        });
+            {
+                where: {
+                    id: req.params.id,
+                },
+            }
+        );
 
         res.status(200).json(updatedBlogpost);
     } catch (err) {
