@@ -7,3 +7,6 @@ After downloading the source code and installing all dependencies, the user must
 
 ![screenshot of tech-blog home](Assets/screenshot-1.png)
 ![screenshot of tech-blog dashboard](Assets/screenshot-2.png)
+
+[deployment link](https://oguerra9.github.io/tech-blog/)
+[GitHub repository](https://github.com/oguerra9/tech-blog)
